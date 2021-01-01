@@ -1,15 +1,13 @@
 const users =[
     {
-        userName:"Admin",
-        firstName:"Mr",
-        lastName:"Admin",
+        name:"admin",
+        email:"admin@gmail.com",
         userType:"admin",
         password:"admin123"
     },
     {
-        userName:"Student",
-        firstName:"Mr",
-        lastName:"Student",
+        name:"Student",
+        email:"student@gmail.com",
         userType:"student",
         password:"student123"
     }
