@@ -4,7 +4,7 @@ const indexRouter = require("./routes/index");
 const port=5000;
 const cors = require('cors');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/mongo');
+// mongoose.connect('mongodb://localhost:27017/mongo');
 
 
 app.use(express.json());

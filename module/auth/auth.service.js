@@ -1,4 +1,4 @@
-const userModel = require('../user/user.model');
+// const userModel = require('../user/user.model');
 const userData = require('./userList');
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
