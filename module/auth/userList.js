@@ -6,7 +6,7 @@ const users =[
         password:"admin123"
     },
     {
-        name:"Student",
+        name:"student",
         email:"student@gmail.com",
         userType:"student",
         password:"student123"
