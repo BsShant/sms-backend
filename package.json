@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.11.9",
     "moongoose": "0.0.5",
-    "node-gyp": "^7.1.2"
+    "node-gyp": "^7.1.2",
+    "node-pre-gyp": "^0.17.0"
   }
 }
