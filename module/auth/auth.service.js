@@ -1,5 +1,5 @@
 const userModel = require('../user/user.model');
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 const createUser = async (data) =>{
