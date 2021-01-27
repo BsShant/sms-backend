@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express"
 
-import UserService from './auth.service'
 
 export const register = (req: Request, res: Response, next: NextFunction) => {
 	const userData = req.body;

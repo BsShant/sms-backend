@@ -1,7 +1,7 @@
-import mongoose from 'mongoose'
+const mon = require('mongoose')
 
-mongoose
-  .connect(process.env.DATABASE_URL, {
+mon
+  .connect(`mongodb+srv://user11:sabin123@cluster0.svzqz.mongodb.net/shopme?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
