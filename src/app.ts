@@ -5,9 +5,21 @@ import * as path from 'path'
 import { createError } from 'http-errors';
 import Routes from './routes/index'
 import * as mongoose from 'mongoose'
+import { getDirectories } from './common/utils/functions'
+import { resolve } from "path";
+import { readdirSync } from "fs";
+
+const env = process.env.NODE_ENV || "development";
+const prefix = env == "development" ? "" : "build/";
+
+
 class App {
   public app: express.Application;
   public port: number;
+  public modules: any[] = getDirectories(resolve(`${prefix}src/modules`));
+  public routeArray: any[] = []
+
+
   constructor(port) {
     this.app = express()
     this.port = port
@@ -24,7 +36,25 @@ class App {
     this.app.use(express.static(path.join(__dirname, 'public')))
   }
   private initializeRoutes() {
-    this.app.use('/api', Routes)
+    try {
+      this.modules.forEach(
+        (module): void => {
+          const dir = `${prefix}src/modules/${module}`;
+          readdirSync(resolve(dir)).forEach(
+            (filename): void => {
+              if (/.*.router/.test(filename)) {
+                const path = `/modules/${module}/${filename}`
+                const router = require(`.${path}`)
+                this.routeArray.push(__dirname + path)
+                this.app.use(`/api/${module}`, router)
+              }
+            }
+          );
+        }
+      );
+    } catch (err) {
+      console.log("Error initializing routes:", err);
+    }
   }
   private finalizeMiddleware() {
     this.app.use(function (req, res, next) {

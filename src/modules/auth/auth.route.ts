@@ -1,7 +1,0 @@
-// import AuthController './auth.controller'
-// const router: any = require('express').Router();
-
-// router.route('/register').post(AuthController.register);
-// router.route('/login').post(AuthController.login);
-
-// module.exports = router;
