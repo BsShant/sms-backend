@@ -11,7 +11,7 @@ const modules: any[] = getDirectories(resolve(`${prefix}src/modules`));
 
 
 const routeArray: any[] = []
-const routes = () => {
+const Routes = () => {
 	modules.forEach(
 		(module): void => {
 			const dir = `${prefix}src/modules/${module}`;
@@ -27,4 +27,5 @@ const routes = () => {
 			);
 		})
 }
-module.exports = routes;
+
+export default Routes
