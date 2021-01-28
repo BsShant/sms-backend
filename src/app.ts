@@ -3,7 +3,7 @@ import * as logger from 'morgan'
 import * as cors from 'cors'
 import * as path from 'path'
 import { createError } from 'http-errors';
-import Routes from './routes/index'
+
 import * as mongoose from 'mongoose'
 import { getDirectories } from './common/utils/functions'
 import { resolve } from "path";
@@ -79,11 +79,14 @@ class App {
       MONGO_PASSWORD,
       MONGO_PATH,
     } = process.env;
-    mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`, { useUnifiedTopology: true, useNewUrlParser: true }).then(() => {
-      console.log(`Database is Connected Successful`)
-    }).catch(e => {
-      console.log("Error in Connecting Database")
-    })
+    mongoose.connect(
+      `mongodb://localhost:27017/schoolsystem`
+      // `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
+      , { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true }).then(() => {
+        console.log(`Database is Connected Successful`)
+      }).catch(e => {
+        console.log("Error in Connecting Database")
+      })
   }
   public listen() {
     this.app.listen(this.port, () => {

@@ -1,10 +1,11 @@
-const UserModel = require('../users/user.model');
-const UserService = require('../users/user.service');
+import UserModel from '../users/user.model'
+import * as service from './../users/user.service';
+
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
-function createToken(data) {
+export const createToken = (data) => {
 	let token = jwt.sign(
 		{ name: data.username, _id: data._id, role: data.role },
 		process.env.jwtSECRET,
@@ -13,8 +14,8 @@ function createToken(data) {
 	return token;
 }
 
-const insert = async (userData) => {
-	const user = await UserService.checkExistingEmailOrUsername(
+export const create = async (userData) => {
+	const user = await service.checkExistingEmailOrUsername(
 		userData.username,
 		userData.email
 	);
@@ -46,7 +47,7 @@ const insert = async (userData) => {
 	});
 };
 
-function findOne(userData) {
+export const findOne = (userData) => {
 	return new Promise(function (resolve, reject) {
 		UserModel.findOne({ username: userData.username }).exec(function (
 			err,
@@ -88,7 +89,3 @@ function findOne(userData) {
 		});
 	});
 }
-module.exports = {
-	insert,
-	findOne,
-};
