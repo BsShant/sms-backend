@@ -1,7 +1,7 @@
 import UserModel from '../users/user.model'
 import * as service from './../users/user.service';
 
-const bcrypt = require('bcrypt');
+import * as bcrypt from 'bcrypt'
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
@@ -25,11 +25,11 @@ export const create = async (userData) => {
 				msg: 'User is already exists',
 			});
 		} else {
-			bcrypt.genSalt(saltRounds, function (err, salt) {
+			bcrypt.genSalt(saltRounds, function (err: any, salt: any) {
 				if (err) {
 					return reject(err);
 				}
-				bcrypt.hash(userData.password, salt, function (err, hash) {
+				bcrypt.hash(userData.password, salt, function (err: any, hash: any) {
 					if (err) {
 						return reject(err);
 					}
@@ -47,11 +47,11 @@ export const create = async (userData) => {
 	});
 };
 
-export const findOne = (userData) => {
+export const log = (userData: any) => {
 	return new Promise(function (resolve, reject) {
-		UserModel.findOne({ username: userData.username }).exec(function (
-			err,
-			user
+		UserModel.findOne({ username: userData.username }).select("+password").exec(function (
+			err: any,
+			user: any
 		) {
 			if (err) {
 				return reject(err);
@@ -60,7 +60,7 @@ export const findOne = (userData) => {
 				bcrypt.compare(
 					userData.password,
 					user.password,
-					function (err, result) {
+					function (err: any, result: any) {
 						if (err) {
 							return reject(err);
 						}
@@ -68,7 +68,8 @@ export const findOne = (userData) => {
 							let token = createToken(user);
 							return resolve({
 								success: result,
-								user: user,
+								username: user.username,
+								email: user.email,
 								token: token,
 								status: 200,
 							});
