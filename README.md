@@ -5,6 +5,8 @@
 - Start local mongodb server
 
 - To run App
+
     `npm run dev`
+
 
 
