@@ -1,5 +1,9 @@
 # School Management System
 
+- Install Dependencies First
+
+    `npm install`
+
 - Create .env file and copy the credential from .env-example
 
 - Start local mongodb server
