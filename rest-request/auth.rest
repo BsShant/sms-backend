@@ -13,14 +13,18 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "admin",
+    "username": "admin1",
     "password": "admin",
-    "email": "shrestha80500@gmail.com",
-    "name": "admin"
+    "email": "shrestha805011@gmail.com",
+    "name": "admin",
+    "address":"Jorpati",
+    "gender":"male",
+    "role": 1
 }
 
 ###
 
 GET http://localhost:3000/api/auth/hello
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJfaWQiOiI2MDEyOWI2YTBhODEyNWMxMTY2OWQxOGEiLCJyb2xlIjoyLCJpYXQiOjE2MTE5MTU1OTQsImV4cCI6MTYxMjAwMTk5NH0.LsV11ukRqnM2zPOjqQPJTfIJelScvoPCt7oc2sfERjo
 
 ###

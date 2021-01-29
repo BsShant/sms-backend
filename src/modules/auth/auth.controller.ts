@@ -1,7 +1,9 @@
+
 import { Request, Response, NextFunction } from "express"
 import * as service from './auth.service'
 
 export const register = (req: Request, res: Response, next: NextFunction) => {
+	console.log(req.body)
 	const userData = req.body;
 	service.create(userData)
 		.then((data) => {
@@ -13,12 +15,12 @@ export const register = (req: Request, res: Response, next: NextFunction) => {
 		});
 }
 
-export const login = (req: Request, res: Response, next: Function) => {
-	service.log(req.body)
-		.then(function (data) {
+export const login = (req: Request, res: Response, next: NextFunction) => {
+	service.login(req.body)
+		.then((data) => {
 			res.json(data);
 		})
-		.catch(function (err) {
+		.catch((err) => {
 			next(err);
 		});
 }

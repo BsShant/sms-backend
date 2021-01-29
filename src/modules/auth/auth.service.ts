@@ -1,91 +1,55 @@
+import { IUserWithUserNameAndPassword } from './../users/user.Interface';
 import UserModel from '../users/user.model'
 import * as service from './../users/user.service';
-
 import * as bcrypt from 'bcrypt'
-const saltRounds = 10;
-const jwt = require('jsonwebtoken');
+import *  as jwt from 'jsonwebtoken'
+import { IUser } from './../users/user.model';
 
-export const createToken = (data) => {
+const saltRounds = 10;
+
+export const createToken = (data: IUser) => {
 	let token = jwt.sign(
 		{ name: data.username, _id: data._id, role: data.role },
-		process.env.jwtSECRET,
+		process.env.ACCESS_TOKEN_SECRET,
 		{ expiresIn: '24h' }
 	);
 	return token;
 }
 
-export const create = async (userData) => {
-	const user = await service.checkExistingEmailOrUsername(
-		userData.username,
-		userData.email
-	);
-	return new Promise(function (resolve, reject) {
+export const create = async (userData: IUser) => {
+	const user: IUser = await service.checkExistingEmailOrUsername(userData.username, userData.email);
+	return new Promise((resolve, reject) => {
 		if (user) {
-			reject({
-				msg: 'User is already exists',
-			});
+			reject({ msg: 'User Already Exists' });
 		} else {
-			bcrypt.genSalt(saltRounds, function (err: any, salt: any) {
-				if (err) {
-					return reject(err);
-				}
-				bcrypt.hash(userData.password, salt, function (err: any, hash: any) {
-					if (err) {
-						return reject(err);
-					}
-					userData.password = hash;
-					var newUser = new UserModel(userData);
-					newUser.save(function (err, done) {
-						if (err) {
-							return reject(err);
-						}
-						return resolve(done);
-					});
-				});
+			const salt = bcrypt.genSaltSync(saltRounds);
+			const hash = bcrypt.hashSync(userData.password, salt);
+			userData.password = hash;
+			var newUser = new UserModel(userData);
+			newUser.save(function (err, done) {
+				if (err) return reject(err);
+				return resolve(done);
 			});
+
 		}
 	});
 };
 
-export const log = (userData: any) => {
+export const login = (userData: IUserWithUserNameAndPassword) => {
 	return new Promise(function (resolve, reject) {
-		UserModel.findOne({ username: userData.username }).select("+password").exec(function (
-			err: any,
-			user: any
-		) {
-			if (err) {
-				return reject(err);
-			}
+		UserModel.findOne({ username: userData.username }).select("+password").exec(function (err: any, user: IUser) {
+			if (err) return reject(err);
 			if (user) {
-				bcrypt.compare(
-					userData.password,
-					user.password,
-					function (err: any, result: any) {
-						if (err) {
-							return reject(err);
-						}
-						if (result) {
-							let token = createToken(user);
-							return resolve({
-								success: result,
-								username: user.username,
-								email: user.email,
-								token: token,
-								status: 200,
-							});
-						} else {
-							return reject({
-								msg: 'Invalid Password',
-								status: 400,
-							});
-						}
-					}
-				);
-			} else {
-				return reject({
-					msg: 'Invalid Username',
-					status: 400,
-				});
+				const result: boolean = bcrypt.compareSync(userData.password, user.password);
+				if (result) {
+					let token = createToken(user);
+					return resolve({
+						username: user.username,
+						email: user.email,
+						accessToken: token,
+					});
+				}
+				reject({ msg: 'Invalid Data' })
 			}
 		});
 	});

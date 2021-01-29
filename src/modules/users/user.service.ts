@@ -49,14 +49,10 @@ import UserModel from './user.model'
 // 	});
 // }
 
-export const checkExistingEmailOrUsername = async (username, email) => {
+export const checkExistingEmailOrUsername = async (username: string, email: string) => {
 	return await UserModel.findOne({
 		$or: [{ username: username }, { email: email }],
 	});
 };
-// module.exports = {
-// 	fetch,
-// 	update,
-// 	remove,
-// 	checkExistingEmailOrUsername,
-// };
+
+
