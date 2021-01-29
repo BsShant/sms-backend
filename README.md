@@ -9,4 +9,6 @@
     `npm run dev`
 
 
+- To test API use rest-request files or postman
+
 
