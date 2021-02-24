@@ -39,6 +39,9 @@ if(process.env.NODE_ENV == 'development'){
 app.use(cors());
 
 // mount router
+app.get('/', (req,res,next)=>{
+    res.send("my school")
+})
 app.use('/api/auth', auth);
 
 app.use(errorHandler)
