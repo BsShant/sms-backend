@@ -1,25 +1,30 @@
 {
-  "name": "server",
+  "name": "school-management-system",
   "version": "1.0.0",
-  "description": "",
+  "description": "School/College  Management System ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "dev": "nodemon src/server"
   },
-  "engines": {
-    "node": "14.2.0"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^5.10.3",
+    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.9",
-    "moongoose": "0.0.5",
-    "node-gyp": "^7.1.2",
-    "node-pre-gyp": "^0.17.0"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.13",
+    "morgan": "^1.10.0",
+    "typescript": "^4.1.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.22",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1"
   }
 }
