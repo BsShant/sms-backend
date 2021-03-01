@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: __dirname + '/config/config.env'});
 
 // load models
-const User = require('./models/User');
+const User = require('./modules/user/models/User');
 
 //connect to db
 mongoose.connect(process.env.MONGO_URI, {

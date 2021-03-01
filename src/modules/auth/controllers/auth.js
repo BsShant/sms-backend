@@ -1,9 +1,8 @@
 // import { Request, Response, NextFunction } from "express";
 // import * as service from "./auth.service";
-const asyncError = require("../middleware/asyncError");
-const ErrorResponse = require("../utils/errorResponse");
-const User = require("../models/User");
-const { findById } = require("../models/User");
+const asyncError = require("../../../middleware/asyncError");
+const ErrorResponse = require("../../../utils/errorResponse");
+const User = require("../../user/models/User");
 
 // @desc register user
 // route POST /api/auth/register
@@ -33,12 +32,11 @@ exports.login = asyncError(async(req, res, next) => {
   // check for user
   const user = await User.findOne({email}).select("+password");
   if(!user){
-	return next(new ErrorResponse(`Invalid credentials`, 401))
+    return next(new ErrorResponse("Invalid credentials", 401));
   }
 
   // check if password matches
   const isMatch = await user.comparePassword(password)
-
   if(!isMatch){
 	return next(new ErrorResponse(`Invalid credentials`, 401))
   }

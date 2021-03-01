@@ -19,7 +19,8 @@ connectDB();
 
 
 // route files
-const auth = require('./routes/auth');
+const auth = require('./modules/auth/routes/auth');
+const user = require('./modules/user/routes/user');
 
 const app = express();
 
@@ -40,6 +41,8 @@ app.use(cors());
 
 // mount router
 app.use('/api/auth', auth);
+app.use('/api/users', user);
+
 
 app.use(errorHandler)
 

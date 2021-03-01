@@ -27,6 +27,9 @@ const UserSchema = new mongoose.Schema({
     minLength: 6,
     select: false,
   },
+  acessList:{
+      type: Array,
+  }
 });
 
 // encrypt password using bcrypt
@@ -36,7 +39,12 @@ UserSchema.pre("save", async function (next) {
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  console.log(this.role)
+  if(this.role==='admin'){
+    this.acessList = [{student:['all students','student details','admission form']},{teacher:['all teachers','teacher detail','add teacher']},{parents:['all parents','parent detail','add parent']}]
+  }
 });
+
 
 // sign jwt and return
 UserSchema.methods.getSignedJwtToken = function () {
