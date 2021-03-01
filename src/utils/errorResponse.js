@@ -5,5 +5,4 @@ class ErrorResponse extends Error {
     this.message = message;
   }
 }
-
 module.exports = ErrorResponse;
