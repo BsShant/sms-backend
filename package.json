@@ -4,7 +4,6 @@
   "description": "School/College  Management System ",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server"
   },
@@ -23,12 +22,6 @@
     "url": "https://gitlab.com/bodhanshrestha/school-management-system/issues"
   },
   "homepage": "https://gitlab.com/bodhanshrestha/school-management-system#readme",
-=======
-    "start": "set NODE_ENV=production &node src/server",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/server"
-  },
->>>>>>> 06bf04fc38a6a54929848acb8a7fe0d1cb58fefb
   "dependencies": {
     "@types/mongoose": "^5.10.3",
     "bcrypt": "^5.0.0",
